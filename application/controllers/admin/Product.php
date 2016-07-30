@@ -74,4 +74,77 @@ class Product extends MY_Controller
         $this->data['temp'] = 'admin/product/index';
         $this->load->view('admin/main', $this->data);
     }
+    function  add(){
+    	
+    	//lay sanh sach san pham    	
+    	$input = array();
+    	$input['where']=array('parent_id'=>0);
+    	$this->load->model('catalog_model');
+    	$catalogs= $this->catalog_model->get_list($input);
+    	foreach ($catalogs as  $row){
+    		$input['where']=array('parent_id'=> $row->id);
+    		$subs = $this->catalog_model->get_list($input);
+    		$row->subs = $subs;
+    	}
+    	$this->data['catalogs']=$catalogs;
+    	// load view
+    	$this->data['temp'] = 'admin/product/add';
+    	$this->load->view('admin/main', $this->data);
+    	
+    	//load thư viện validate dữ liệu
+    	$this->load->library('form_validation');
+    	$this->load->helper('form');
+    	
+    	if($this->input->post())
+    	{
+    		$this->form_validation->set_rules('name', 'Tên', 'required');
+    		$this->form_validation->set_rules('catalog', 'Thể loại', 'required');
+    		$this->form_validation->set_rules('price', 'Giá', 'required');
+    	
+    		//nhập liệu chính xác
+    		if($this->form_validation->run())
+    		{
+    			//them vao csdl
+    			$name       = $this->input->post('name');
+    			$catalog_id = $this->input->post('catalog');
+				$price  	= $this->input->post('price');
+				$price      = str_replace(',','' , $price);
+
+				//lay ten file anh minh hoa duoc upload len
+				$this->load->library('upload_library');
+				$upload_path = './upload/product';
+				
+				$upload_data = $this->upload_library->upload($upload_path,'image');
+				$image_link = '';
+				if($upload_data['file_name']){
+					$image_link = $upload_data['file_name']; 
+				}
+				//upload cac anh kem theo
+				$image_list = array();
+				$image_list = $this->upload_library->upload_file($upload_path,'image_list');
+				$image_list = json_encode($image_list);
+    			//luu du lieu can them
+    			$data = array(
+    					'name'      	=> $name,
+    					'catalog_id'	=> $catalog_id,
+    					'price'			=> $price,
+    					'image'			=> $image_link,
+    					'image_list'	=> $image_list,
+    					'discount'		=> $this->input->post('discount'),
+    					'warranty' 		=> $this->input->post('warranty')
+    					
+    			);
+    			//them moi vao csdl
+    			if($this->catalog_model->create($data))
+    			{
+    				//tạo ra nội dung thông báo
+    				$this->session->set_flashdata('message', 'Thêm mới dữ liệu thành công');
+    			}else{
+    				$this->session->set_flashdata('message', 'Không thêm được');
+    			}
+    			//chuyen tới trang danh sách
+    			redirect(admin_url('catalog'));
+    		}
+    	}
+    }
 }
