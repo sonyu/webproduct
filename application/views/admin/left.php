@@ -54,8 +54,8 @@
 		</a>
 
 			<ul style="display: none;" class="sub">
-				<li><a href="admin/slide.html"> Slide </a></li>
-				<li><a href="admin/news.html"> Tin tức </a></li>
+				<li><a href="<?php echo admin_url('slide')?>"> Slide </a></li>
+				<li><a href="<?php echo admin_url('news')?>"> Tin tức </a></li>
 				<li><a href="admin/info.html"> Trang thông tin </a></li>
 				<li><a href="admin/video.html"> Video </a></li>
 			</ul></li>

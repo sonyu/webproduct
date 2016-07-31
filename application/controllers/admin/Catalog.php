@@ -144,18 +144,54 @@ Class Catalog extends MY_Controller
     {
         //lay id danh mục
         $id = $this->uri->rsegment(3);
+        $this->_del($id,false);
+        //tạo ra nội dung thông báo
+        $this->session->set_flashdata('message', 'Xóa dữ liệu thành công');
+        redirect(admin_url('catalog'));
+    }
+    /*
+     * xoa nhieu danh muc san phẩm
+     */
+    function delete_all(){
+        $ids = $this->input->post('ids');
+        //var_dump($ids);
+        foreach ($ids as $id){
+            $this->_del($id, false);
+        }
+    }
+    
+    /*
+     * thuc hien xoa
+     */
+    private function _del($id, $rediect = true){
+        
         $info = $this->catalog_model->get_info($id);
         if(!$info)
         {
             //tạo ra nội dung thông báo
             $this->session->set_flashdata('message', 'không tồn tại danh mục này');
-            redirect(admin_url('catalog'));
+            if($rediect){
+                redirect(admin_url('catalog'));
+            }else {
+                return false;
+            }
+        }
+        //kiem tra xem trong danh muc nay co san pham ko
+        $this->load->model('product_model');
+        $product = $this->product_model->get_info_rule(array('catalog_id'=>$id),'id');
+        //pre($product);
+        if($product){
+            $this->session->set_flashdata('message', 'Không được xóa danh mục '.$info->name.' này vì có chứa sản phẩm. Bạn phải xóa sản phẩm trước');
+            if($rediect){
+                redirect(admin_url('catalog'));
+            }else {
+                return false;
+            }
+           
         }
         //xoa du lieu
         $this->catalog_model->delete($id);
-        //tạo ra nội dung thông báo
-        $this->session->set_flashdata('message', 'Xóa dữ liệu thành công');
-        redirect(admin_url('catalog'));
+        
     }
 }
 

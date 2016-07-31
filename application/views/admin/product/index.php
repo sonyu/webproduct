@@ -4,7 +4,8 @@
 <div class="line"></div>
 <div class="wrapper" id="main_product">
 	<div class="widget">
-
+            
+    <?php $this->load->view('admin/message', $this->data);?>
 		<div class="title">
 			<span class="titleIcon"><input id="titleCheck" name="titleCheck"
 				type="checkbox"></span>
@@ -75,8 +76,7 @@
 					<td colspan="6">
 						<div class="list_action itemActions">
 							<a href="#submit" id="submit" class="button blueB"
-								url="admin/product/del_all.html"> <span style="color: white;">Xóa
-									hết</span>
+								url="<?php echo admin_url('product/del_all')?>"> <span style="color: white;">Xóa hết</span>
 							</a>
 						</div>
 						<div class="pagination">
@@ -87,7 +87,7 @@
 			</tfoot>
 			<tbody class="list_item">
 			<?php foreach ($list as $row):?>
-				<tr class="row_9">
+				<tr class="row_<?php echo $row->id?>">
 					<td><input name="id[]" value="<?php echo $row->id?>"
 						type="checkbox"></td>
 					<td class="textC"><?php echo $row->id?></td>
@@ -110,15 +110,15 @@
 					<b style='color: red'><?php echo  number_format($row->price)?></b>
 					<?php endif;?>
 					</td>
-					<td class="textC">01-01-1970</td>
+					<td class="textC"><?php echo convet_timestamp($row->created)?></td>
 					<td class="option textC">
 						</a> <a href="product/view/9.html" target="_blank" class="tipS"
 						title="Xem chi tiết sản phẩm"> <img
 							src="<?php echo public_url('admin')?>/images/icons/color/view.png">
-					</a> <a href="admin/product/edit/9.html" title="Chỉnh sửa"
+					</a> <a href="<?php echo admin_url('product/edit/'.$row->id)?>" title="Chỉnh sửa"
 						class="tipS"> <img
 							src="<?php echo public_url('admin')?>/images/icons/color/edit.png">
-					</a> <a href="admin/product/del/9.html" title="Xóa"
+					</a> <a href="<?php echo admin_url('product/xoa/'.$row->id)?>" title="Xóa"
 						class="tipS verify_action"> <img
 							src="<?php echo public_url('admin')?>/images/icons/color/delete.png">
 					</a></td>
