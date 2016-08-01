@@ -14,7 +14,7 @@
 	           
 	           <div id="container">
 	                  <div class="left">
-	                        <?php $this->load->view('site/left');?>
+	                        <?php $this->load->view('site/left', $this->data);?>
 	                  </div>
 	                  
 	                  <div class="content">

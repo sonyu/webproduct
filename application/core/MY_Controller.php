@@ -22,6 +22,17 @@ Class MY_Controller extends CI_Controller
             default:
                 {
                     //xu ly du lieu o trang ngoai
+                    //lay danh sach danh muc san pham
+                    $this->load->model('catalog_model');
+                    $input = array();
+                    $input['where'] = array('parent_id'=>0);
+                    $catalog_list = $this->catalog_model->get_list($input);
+                    foreach ($catalog_list as $row){
+                    	$input['where'] = array('parent_id'=>$row->id);
+                    	$subs = $this->catalog_model->get_list($input);
+                    	$row->subs =$subs;
+                    }
+                    $this->data['catalog_list'] = $catalog_list;
                 }
             
         }
