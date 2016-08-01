@@ -33,6 +33,13 @@ Class MY_Controller extends CI_Controller
                     	$row->subs =$subs;
                     }
                     $this->data['catalog_list'] = $catalog_list;
+                    
+                    //lay danh sach cac bai viet moi
+                    $this->load->model('news_model');
+                    $input = array();
+                    $input['limit'] = array(5,0);
+                    $news_list = $this->news_model->get_list($input);
+                    $this->data['news_list'] =$news_list;
                 }
             
         }
