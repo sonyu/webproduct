@@ -10,10 +10,10 @@
 		<?php foreach ($product_newest as $row):?>
 		<div class="product_item">
 			<h3>
-				<a title="<?php echo $row->name?>" href=""><?php echo $row->name?></a>
+				<a title="<?php echo $row->name?>" href="<?php echo base_url('product/view/'.$row->id)?>"><?php echo $row->name?></a>
 			</h3>
 			<div class="product_img">
-				<a title="<?php echo $row->name?>" href=""> <img alt="<?php echo $row->name?>"
+				<a title="<?php echo $row->name?>" href="<?php echo base_url('product/view/'.$row->id)?>"> <img alt="<?php echo $row->name?>"
 					src="<?php echo base_url('/upload/product/'.$row->image_link)?>">
 				</a>
 			</div>
@@ -52,10 +52,10 @@
 		<?php foreach ($product_buy as $row):?>
 		<div class="product_item">
 			<h3>
-				<a title="<?php echo $row->name?>" href=""><?php echo $row->name?></a>
+				<a title="<?php echo $row->name?>" href="<?php echo base_url('product/view/'.$row->id)?>"><?php echo $row->name?></a>
 			</h3>
 			<div class="product_img">
-				<a title="<?php echo $row->name?>" href=""> <img alt="<?php echo $row->name?>"
+				<a title="<?php echo $row->name?>" href="<?php echo base_url('product/view/'.$row->id)?>"> <img alt="<?php echo $row->name?>"
 					src="<?php echo base_url('/upload/product/'.$row->image_link)?>">
 				</a>
 			</div>

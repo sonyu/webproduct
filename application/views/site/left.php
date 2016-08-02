@@ -87,13 +87,13 @@
 		<!-- The content-box -->
 		<ul class="catalog-main">
 	          <?php foreach ($catalog_list as $row):?>
-                           <li><span><a href=""
+                           <li><span><a href="<?php echo base_url('product/catalog/'.$row->id)?>"
 					title="<?php echo $row->name?>"><?php echo $row->name?></a></span>
                     			<?php if(!empty($row->subs)):?>
                     			 <!-- lay danh sach danh muc con -->
 				<ul class="catalog-sub">
 			             	 	 <?php foreach ($row->subs as $subs):?> 
-			                            <li><a href="#"
+			                            <li><a href="<?php echo base_url('product/catalog/'.$subs->id)?>"
 						title="<?php echo $subs->name?>"><?php echo $subs->name?></a></li>		
 			                     <?php endforeach;?>
 			                     </ul>
