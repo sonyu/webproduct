@@ -147,7 +147,7 @@ $(document).ready(function() {
 
 			<div class='action'>
 				<a class='button'
-					style='float: left; padding: 8px 15px; font-size: 16px' href=""
+					style='float: left; padding: 8px 15px; font-size: 16px' href="<?php echo base_url('cart/add/'.$product->id)?>"
 					title='Mua ngay'>Thêm vào giỏ hàng</a>
 				<div class='clear'></div>
 			</div>

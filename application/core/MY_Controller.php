@@ -40,6 +40,8 @@ Class MY_Controller extends CI_Controller
                     $input['limit'] = array(5,0);
                     $news_list = $this->news_model->get_list($input);
                     $this->data['news_list'] =$news_list;
+                    $this->load->library('cart');
+                    $this->data['total_items'] = $this->cart->total_items();
                 }
             
         }

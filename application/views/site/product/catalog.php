@@ -32,7 +32,7 @@
 				<p style="float: left; margin-left: 10px">
 					Lượt xem: <b><?php echo $row->view?></b>
 				</p>
-				<a title="Mua ngay" href="" class="button">Mua ngay</a>
+				<a title="Mua ngay" href="<?php echo base_url('cart/add/'.$row->id)?>" class="button">Mua ngay</a>
 				<div class="clear"></div>
 			</div>
 		</div>
