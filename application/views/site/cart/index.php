@@ -1,4 +1,4 @@
-<<style>
+<style>
 <!--
 table#cart_contents td{padding:10px; border:1px solid #ccc}
 
@@ -35,7 +35,7 @@ table#cart_contents td{padding:10px; border:1px solid #ccc}
 				
 				<tr>
 					<td colspan = "5"><b style ="color: red">Tổng số tiền thanh toán : <?php echo number_format($total_amount).'đ' ?></b>
-									  <a href = "<?php base_url('cart/del')?>">Xóa toàn bộ</a>	
+									  <a href = "<?php echo base_url('cart/del')?>">Xóa toàn bộ</a>	
 					</td>
 				</tr>
 				<tr>

@@ -69,7 +69,6 @@ class Cart extends MY_Controller {
 	 */
 	function del() {
 		$id = $this->uri->rsegment ('3');
-		
 		$id = intval ( $id );
 		// trong truong hop xoa 1 san pham nao do
 		if ($id > 0) {

@@ -23,7 +23,7 @@ class Product extends MY_Controller
         // lay ra thong tin cua danh muc cua the loai
         $catalog = $this->catalog_model->get_info($id);
         if (! $catalog) {
-            redirect();
+            redirect(base_url('product/catalog'));
         }
         $input = array();
         $this->data['catalog'] = $catalog;
