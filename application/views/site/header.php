@@ -63,7 +63,7 @@ $(function() {
 		<li class=""><a href="video.html">Video</a></li>
 		<li class=""><a href="lien-he.html">Liên hệ</a></li>
 		<?php if(isset($user_info)):?>
-		<li class=""><a href="">Xin chào :<?php echo $user_info->name?></a></li>
+		<li class=""><a href="<?php echo site_url('user')?>">Xin chào :<?php echo $user_info->name?></a></li>
 		<li class=""><a href="<?php echo site_url('user/logout')?>">Thoát</a></li>
 		<?php else :?>
 		<li class=""><a href="<?php echo site_url('user/register')?>">Đăng ký</a></li>

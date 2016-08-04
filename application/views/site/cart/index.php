@@ -39,7 +39,10 @@ table#cart_contents td{padding:10px; border:1px solid #ccc}
 					</td>
 				</tr>
 				<tr>
-					<td colspan = "5" type = 'submit'><button>Cập nhật</button></td>
+					<td colspan = "5" type = 'submit'>
+						<button>Cập nhật</button>
+						<a href ="<?php echo site_url('order/checkout')?>" class="button">Mua hàng</a>
+					</td>
 				</tr>
 		</tbody>
 	</table>
