@@ -101,11 +101,65 @@ class Product extends MY_Controller
         $image_list = json_decode($product->image_list);
         $this->data['image_list'] = $image_list;
         
+        //cap nhat lai luot view
+        $data = array();
+        $data['view'] = $product->view+1;
+        $this->product_model->update($product->id,$data);
         //lay thong tin cua danh muc san pham
         $catalog = $this->catalog_model->get_info($product->catalog_id);        
         $this->data['catalog'] = $catalog;
         // hien thi ra phan view
         $this->data['temp'] = 'site/product/view';
         $this->load->view('site/layout', $this->data);
+    }
+    /*
+     * tim kiem theo ten san pham
+     */
+    function search(){
+    	
+    	if($this->uri->rsegment(3)==1){
+    		//xu ly autocomplete
+    		$key = $this->input->get('term');
+    	}else{
+    		$key = $this->input->get('key-search');
+    	}
+    	$this->data['key'] = trim($key);
+    	$input['like'] = array('name',$key);
+    	$list = $this->product_model->get_list($input);
+    	$this->data['list'] = $list;
+ 
+    	if($this->uri->rsegment(3)==1){
+    		//xu ly autocomplete
+    		$result = array();
+    		foreach ($list as $row){
+    			$item = array();
+    			$item['id'] = $row->name;
+    			$item['label'] = $row->name;
+    			$result[] = $item;
+    		}
+    		die(json_encode($result));
+    	}else{
+    		//load view
+    		$this->data['temp'] = 'site/product/search';
+    		$this->load->view('site/layout', $this->data);
+    	}
+    }
+    /*
+     * tim kiem theo gia
+     */
+    function search_price(){
+    	
+    	$price_from = intval($this->input->get('price_from'));
+    	$this->data['price_from'] = $price_from;
+    	
+    	$price_to = intval($this->input->get('price_to'));
+    	$this->data['price_to'] = $price_to;
+    	$input = array();
+    	$input['where'] = array('price >='=>$price_from, 'price <='=>$price_to);
+    	$list = $this->product_model->get_list($input);
+    	$this->data['list'] = $list;
+    	$this->data['temp'] = 'site/product/search_price';
+    	$this->load->view('site/layout', $this->data);
+    	//pre($list);
     }
 }
