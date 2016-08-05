@@ -25,7 +25,7 @@ class Cart extends MY_Controller {
 		$data ['id'] = $product->id;
 		$data ['qty'] = $qty;
 		$data ['name'] = url_title ( $product->name );
-		$data ['image_link'] = $product->image->link;
+		$data ['image_link'] = $product->image_link;
 		$data ['price'] = $product->price;
 		$this->cart->insert ( $data );
 		
@@ -41,7 +41,7 @@ class Cart extends MY_Controller {
 		$carts = $this->cart->contents ();
 		// tong so san pham co trong gio hang
 		$total_items = $this->cart->total_items ();
-		
+		//pre($carts);
 		$this->data ['carts'] = $carts;
 		$this->data ['total_items'] = $total_items;
 		

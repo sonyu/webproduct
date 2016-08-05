@@ -6,8 +6,17 @@
 	<div class="box-content-center product">
 		<h1>Thông tin chi tiết đơn hàng</h1>
 		<form class="t-form form_action" method="post"
-			action="<?php echo site_url('user/edit')?>"
+			action="<?php echo site_url('order/checkout')?>"
 			enctype="multipart/form-data">
+			<div class="form-row">
+				<label for="param_email" class="form-label">Tổng số tiền thanh toán:</label>
+				<div class="form-item">
+				<b style="color:red"><?php echo number_format($total_amount)?> đ</b>
+					<div class="clear"></div>
+					<div class="error" id="email_error"><?php echo form_error('email')?></div>
+				</div>
+				<div class="clear"></div>
+			</div>
 			<div class="form-row">
 				<label for="param_email" class="form-label">Email:<span class="req">*</span></label>
 				<div class="form-item">
@@ -46,17 +55,34 @@
 					class="req">*</span></label>
 				<div class="form-item">
 					<textarea class="input" id="message" name="message"></textarea>
+					<p>Nhập địa chỉ và thời gian nhận hàng</p>
 					<div class="clear"></div>
 					<div class="error" id="message_error"><?php echo form_error('message')?></div>
 				</div>
 				<div class="clear"></div>
 			</div>
-
-
+			
+			<div class="form-row">
+				<label for="param_address" class="form-label">Thanh toán qua:<span
+					class="req">*</span></label>
+				<div class="form-item">
+					<select name ="payment">
+							<option value= "">----Chọn cổng thanh toán-----</option>
+							<option value="offline">Thanh toán khi nhận hàng</option>
+							<option value="baokim">Bảo Kim</option>
+							<option value="nganluong">Ngân Lượng</option>
+					</select>
+					<div class="clear"></div>
+					<div class="error" id="payment_error"><?php echo form_error('payment')?></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+			
 			<div class="form-row">
 				<label class="form-label">&nbsp;</label>
 				<div class="form-item">
-					<input type="submit" class="button" value="Chỉnh sửa thông tin"
+					<input type="submit" class="button" value="Thanh toán"
 						name="submit">
 				</div>
 			</div>
