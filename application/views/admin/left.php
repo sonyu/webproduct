@@ -21,8 +21,8 @@
 		</a>
 
 			<ul style="display: none;" class="sub">
-				<li><a href="admin/tran.html"> Giao dịch </a></li>
-				<li><a href="admin/product_order.html"> Đơn hàng sản phẩm </a></li>
+				<li><a href="<?php echo admin_url('transaction')?>"> Giao dịch </a></li>
+				<li><a href="<?php echo admin_url('transaction')?>"> Đơn hàng sản phẩm </a></li>
 			</ul></li>
 		<li class="product"><a href="admin/product.html" class="exp inactive">
 				<span>Sản phẩm</span> <strong>3</strong>
